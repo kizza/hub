@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import styles from './App.module.scss';
+import { Button, Typography, makeStyles, Theme } from "@material-ui/core";
+import { ThemeProvider, createStyles } from "@material-ui/styles";
+import React from "react";
+import { theme, styles } from "./theme";
+import Nav from './Nav';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    title: {
+      marginBottom: theme.spacing(2)
+    },
+    page: {
+      padding: theme.spacing(3)
+    }
+  })
+);
 
 const App: React.FC = () => {
+  const classes = useStyles();
+
   return (
-    <div className={styles.App}>
-      <header className={styles.header}>
-        <img src={logo} className={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className={styles.link}
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  <ThemeProvider theme={theme}>
+    <Nav />
+    <div className={classes.page}>
+      <Typography variant="h1" className={classes.title}>
+        Welcome to the hub!
+      </Typography>
+      <Button className={styles(theme).button} variant="contained" color="primary">
+        Hello
+      </Button>
+      <Button variant="contained">world</Button>
     </div>
-  );
+  </ThemeProvider>
+  )
 }
 
 export default App;
