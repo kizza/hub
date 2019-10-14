@@ -11,21 +11,22 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       position: "relative",
-      paddingTop: theme.spacing(4),
+      paddingTop: theme.spacing(2),
       paddingRight: theme.spacing(1)
     },
+    chart: {
+      paddingTop: theme.spacing(2)
+    },
     chartLabel: {
+      display: 'block',
       padding: theme.spacing(4),
-      paddingTop: theme.spacing(6)
+      paddingBottom: theme.spacing(1)
     },
     spinner: {
       position: "absolute",
       margin: "22% -4%",
       width: "100%",
       textAlign: "center"
-    },
-    chart: {
-      paddingTop: theme.spacing(2)
     }
   })
 );
@@ -137,7 +138,7 @@ const Chart: React.SFC<Chart> = ({ title, items }) => {
       <div className={classes.chart}>
         <canvas id="myChart" ref={chartRef} />
       </div>
-      <Data items={items} />
+      <Data items={items.reverse()} />
     </div>
   );
 };

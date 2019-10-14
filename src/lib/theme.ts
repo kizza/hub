@@ -18,6 +18,7 @@ export const theme = createMuiTheme({
   palette: {
     primary: brown,
     secondary: { main: "#8BC34A" },
+    accentColor: { main: "#8BC34A" },
     background: {
       default: "#FFF",
       paper: brown[300]

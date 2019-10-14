@@ -16,7 +16,10 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(4),
       paddingTop: theme.spacing(9),
       paddingBottom: theme.spacing(7),
-      position: 'relative'
+      position: 'relative',
+      [theme.breakpoints.up('lg')]: {
+        marginBottom: theme.spacing(4)
+      }
     },
     menuButton: {
       marginRight: theme.spacing(2)
