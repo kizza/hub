@@ -3,14 +3,14 @@ import Graph from "chart.js";
 import React, { useEffect, useState, useRef } from "react";
 import { MoistureLevel } from "../models";
 import Spinner from "./Spinner";
-import {Typography} from '@material-ui/core';
-import Data from './Data';
-import {theme} from '../theme';
+import { Typography } from "@material-ui/core";
+import Data from "./Data";
+import { theme } from "../lib/theme";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      position: 'relative',
+      position: "relative",
       paddingTop: theme.spacing(4),
       paddingRight: theme.spacing(1)
     },
@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: theme.spacing(6)
     },
     spinner: {
-      position: 'absolute',
-      margin: '22% -4%',
-      width: '100%',
-      textAlign: 'center'
+      position: "absolute",
+      margin: "22% -4%",
+      width: "100%",
+      textAlign: "center"
     },
     chart: {
-      paddingTop: theme.spacing(2),
+      paddingTop: theme.spacing(2)
     }
   })
 );
@@ -46,17 +46,14 @@ const dataToGraph = (data: MoistureLevel[]) => {
 };
 
 interface Chart {
-  title: string,
+  title: string;
   items: MoistureLevel[];
 }
 
 const formatTooltip = (item: MoistureLevel) =>
   [`Sensor: ${item.Sensor}`, `Created: ${item.createdAt}`].join("\n\n");
 
-const populateChart = (
-  node: HTMLCanvasElement,
-  items: MoistureLevel[]
-) => {
+const populateChart = (node: HTMLCanvasElement, items: MoistureLevel[]) => {
   const canvas = node.getContext("2d")!;
   const { labels, data } = dataToGraph(items);
 
@@ -111,7 +108,7 @@ const populateChart = (
 const Chart: React.SFC<Chart> = ({ title, items }) => {
   const chartRef = useRef(null);
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   const [state, setState] = useState({ loading: true });
 
@@ -119,7 +116,7 @@ const Chart: React.SFC<Chart> = ({ title, items }) => {
 
   useEffect(() => {
     if (chartRef.current) {
-      populateChart(chartRef.current!, items)
+      populateChart(chartRef.current!, items);
     }
 
     setState({ loading: items.length === 0 });
@@ -128,13 +125,15 @@ const Chart: React.SFC<Chart> = ({ title, items }) => {
   return (
     <div className={classes.container}>
       <Typography variant="button" className={classes.chartLabel}>
-        { title }
+        {title}
       </Typography>
-      {loading ?
+      {loading ? (
         <div className={classes.spinner}>
           <Spinner />
         </div>
-      : ""}
+      ) : (
+        ""
+      )}
       <div className={classes.chart}>
         <canvas id="myChart" ref={chartRef} />
       </div>

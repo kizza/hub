@@ -1,6 +1,6 @@
 import axios from "axios";
 import { env } from "./env";
-import { MoistureLevel } from "./models";
+import { MoistureLevel } from "../models";
 
 const client = axios.create({
   baseURL: env("REACT_APP_PERSIST_BASE_URL"),
@@ -10,7 +10,7 @@ const client = axios.create({
   }
 });
 
-const mock = false;
+const mock = true;
 
 const mockData = (): Promise<MoistureLevel[]> =>
   new Promise(resolve => {

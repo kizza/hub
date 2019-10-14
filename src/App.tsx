@@ -5,8 +5,8 @@ import { createStyles, ThemeProvider } from "@material-ui/styles";
 import React, { useEffect, useState } from "react";
 import Chart from "./components/Chart";
 import Nav from "./components/Nav";
-import { getData } from "./data";
-import { theme } from "./theme";
+import { getData } from "./lib/data";
+import { theme } from "./lib/theme";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
