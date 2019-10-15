@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       position: "relative",
-      paddingTop: theme.spacing(2),
+      paddingTop: theme.spacing(1),
       paddingRight: theme.spacing(1)
     },
     chart: {
@@ -138,7 +138,7 @@ const Chart: React.SFC<Chart> = ({ title, items }) => {
       <div className={classes.chart}>
         <canvas id="myChart" ref={chartRef} />
       </div>
-      <Data items={items.reverse()} />
+      { items.length > 0 && <Data items={items.reverse()} /> }
     </div>
   );
 };

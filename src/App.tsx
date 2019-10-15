@@ -1,5 +1,4 @@
 import {
-  Button,
   Container,
   CssBaseline,
   Fab,
@@ -7,7 +6,6 @@ import {
   Theme
 } from "@material-ui/core";
 import RefreshIcon from "@material-ui/icons/Refresh";
-import StarIcon from "@material-ui/icons/Star";
 import { createStyles, ThemeProvider } from "@material-ui/styles";
 import React, { useEffect, useState } from "react";
 import Chart from "./components/Chart";
@@ -21,9 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       padding: 0
-    },
-    page: {
-      padding: theme.spacing(3)
     },
     fab: {
       position: "absolute",
@@ -81,17 +76,6 @@ const App: React.FC = () => {
           handleChange={handleTimeframeChange}
         />
         <Chart title="Moisture" items={items.reverse()} />
-        <div className={classes.page}>
-          <Button
-            startIcon={<StarIcon />}
-            className={classes.button}
-            variant="contained"
-            color="secondary"
-          >
-            Hello
-          </Button>
-          <Button variant="contained">world</Button>
-        </div>
       </Container>
     </ThemeProvider>
   );
