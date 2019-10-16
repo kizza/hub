@@ -1,7 +1,7 @@
-import { Typography } from "@material-ui/core";
+import { Grow, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Graph from "chart.js";
-import React, { useEffect, useRef, useState, RefObject } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import { useWindowResize } from "../lib/hooks";
 import { theme } from "../lib/theme";
 import { MoistureLevel } from "../models";
@@ -148,7 +148,11 @@ const Chart: React.SFC<Chart> = ({ title, items }) => {
       <div className={classes.chart}>
         <canvas id="myChart" ref={chartDomRef} />
       </div>
-      {items.length > 0 && <Data items={items.reverse()} />}
+      <Grow timeout={600} in={items.length > 0}>
+        <div>
+          <Data items={items.reverse()} />
+        </div>
+      </Grow>
     </div>
   );
 };
