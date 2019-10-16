@@ -65,7 +65,7 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Nav>
-        <Fab color="secondary" className={classes.fab} onClick={populate}>
+        <Fab color="primary" className={classes.fab} onClick={populate}>
           <RefreshIcon />
         </Fab>
       </Nav>

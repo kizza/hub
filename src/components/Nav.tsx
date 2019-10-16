@@ -14,8 +14,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     header: {
       padding: theme.spacing(4),
-      paddingTop: theme.spacing(9),
-      paddingBottom: theme.spacing(7),
+      background: 'linear-gradient(0deg,rgba(129, 196, 52, 0.78),rgba(70, 113, 21, 0.81)), url(./background.jpg)',
+      backgroundSize:'cover',
+      paddingTop: theme.spacing(10),
+      paddingBottom: theme.spacing(6),
       position: 'relative',
       [theme.breakpoints.up('lg')]: {
         marginBottom: theme.spacing(4)
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     subtitle: {
       flexGrow: 1,
-      fontWeight: 300
+      fontWeight: 400
     }
   })
 );
