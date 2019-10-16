@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     button: {
       marginRight: theme.spacing(2)
+    },
+    footer: {
+      textAlign: 'center',
+      color: '#ccc'
     }
   })
 );
@@ -77,6 +81,7 @@ const App: React.FC = () => {
         />
         <Chart title="Moisture" items={items.reverse()} />
       </Container>
+      <p className={classes.footer}>v0.4</p>
     </ThemeProvider>
   );
 };
