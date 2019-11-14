@@ -1,10 +1,10 @@
 import { Grow, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Graph from "chart.js";
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, { RefObject, useEffect, useRef } from "react";
 import { useWindowResize } from "../lib/hooks";
 import { theme } from "../lib/theme";
-import { MoistureLevel } from "../models";
+import { DataStatus, MoistureLevel } from "../models";
 import Data from "./Data";
 import Spinner from "./Spinner";
 
@@ -50,6 +50,7 @@ const formatGraphData = (data: MoistureLevel[]) => {
 interface Chart {
   title: string;
   items: MoistureLevel[];
+  status: DataStatus;
 }
 
 const formatTooltip = (item: MoistureLevel) =>
@@ -114,18 +115,14 @@ const createChart = (
   });
 };
 
-const Chart: React.SFC<Chart> = ({ title, items }) => {
+const Chart: React.SFC<Chart> = ({ title, items, status }) => {
   const chartDomRef = useRef<HTMLCanvasElement>(null);
 
   const classes = useStyles();
 
-  const [state, setState] = useState({ loading: true });
-
-  const { loading } = state;
+  const loading = status === DataStatus.Loading;
 
   useEffect(() => {
-    setState({ loading: items.length === 0 });
-
     createChart(chartDomRef, items);
   }, [chartDomRef, loading, items]);
 

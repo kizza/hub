@@ -13,7 +13,7 @@ import Nav from "./components/Nav";
 import Timeframe from "./components/Timeframe";
 import { getData } from "./lib/data";
 import { theme } from "./lib/theme";
-import { MoistureLevel, TimeframeOption } from "./models";
+import { DataStatus, MoistureLevel, TimeframeOption } from "./models";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,14 +30,15 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(2)
     },
     footer: {
-      textAlign: 'center',
-      color: '#ccc'
+      textAlign: "center",
+      color: "#ccc"
     }
   })
 );
 
 type App = {
   items: MoistureLevel[];
+  status: DataStatus;
   timeframe: TimeframeOption;
 };
 
@@ -46,18 +47,24 @@ const App: React.FC = () => {
 
   const [data, setData] = useState({
     timeframe: TimeframeOption.Last24Hours,
-    items: []
+    items: [],
+    status: DataStatus.Loading
   });
 
-  const { items, timeframe } = data;
+  const { items, status, timeframe } = data;
 
   const populate = () => {
-    setData({ timeframe, items: [] });
+    setData({ timeframe, items: [], status: DataStatus.Loading });
 
-    getData("MoistureLevel", timeframe).then(results => {
-      console.log("Loaded results", results);
-      setData({ timeframe, items: results });
-    });
+    getData("MoistureLevel", timeframe)
+      .then(results => {
+        console.log("Loaded results", results);
+        setData({ timeframe, items: results, status: DataStatus.Loaded });
+      })
+      .catch(e => {
+        console.log("Error loading data", e);
+        setData({ timeframe, items: [], status: DataStatus.Errored });
+      });
   };
 
   useEffect(populate, [timeframe]);
@@ -79,7 +86,7 @@ const App: React.FC = () => {
           timeframe={timeframe}
           handleChange={handleTimeframeChange}
         />
-        <Chart title="Moisture" items={items.reverse()} />
+        <Chart title="Moisture" status={status} items={items.reverse()} />
       </Container>
       <p className={classes.footer}>v0.4</p>
     </ThemeProvider>

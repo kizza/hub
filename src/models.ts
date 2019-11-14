@@ -4,6 +4,12 @@ export enum TimeframeOption {
   All = "All"
 }
 
+export enum DataStatus {
+  Loading,
+  Loaded,
+  Errored
+}
+
 export type MoistureLevel = {
   objectId: string;
   createdAt: string;

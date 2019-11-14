@@ -76,13 +76,14 @@ export const getData = (modelName: string, timeframe: TimeframeOption) => {
     );
   }
 
+  if (timeframe === TimeframeOption.All) {
+    query.limit = 100;
+  }
+
   console.log("query is", compileQuery(query));
   return mock
     ? mockData()
     : client
         .get(`/classes/${modelName}?${compileQuery(query)}`)
-        .then(response => response.data.results)
-        .catch(e => {
-          console.log(`Error querying ${modelName}`, e);
-        });
+        .then(response => response.data.results);
 };
